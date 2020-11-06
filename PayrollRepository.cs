@@ -27,5 +27,43 @@ Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubn
                 return false;
             }
         }
+        public void GetPayrollDetails()
+        {
+            PayrollDetails model = new PayrollDetails();
+            try
+            {
+                using (connection)
+                {
+                    string query = @"select * from dbo.PayrollDetails";
+                    SqlCommand command = new SqlCommand(query, connection);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            model.Payrollid = reader.GetInt32(0);
+                            model.BasePay = reader.GetInt32(1);
+                            model.Deductions = reader.GetInt32(2);
+                            model.TaxablePay = reader.GetInt32(3);
+                            model.IncomeTax = reader.GetInt32(4);
+                            Console.WriteLine("Payrollid" +" "+ "Basepay" +" "+ "Deductions" +" "+ "TaxablePay" +" "+ "IncomeTax" +" "+ "NetPay");
+                            Console.WriteLine(model.Payrollid+" "+ model.BasePay + " "+ model.Deductions + " "+ model.TaxablePay + " "+ model.IncomeTax
+                                +" "+(model.BasePay-model.Deductions-model.TaxablePay));
+                        }
+                    }
+                    else
+                        Console.WriteLine("No data found");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 }
