@@ -65,5 +65,47 @@ Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubn
                 connection.Close();
             }
         }
+        public void UpdateSalary()
+        {
+            PayrollDetails payroll = new PayrollDetails();
+            int empId;
+            try
+            {
+                using (connection)
+                {
+                    string query = @"select PayrollId from dbo.Employee where EmpName='Mukhesh'";
+                    SqlCommand command = new SqlCommand(query, connection);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            empId = reader.GetInt32(0);
+                            
+                        }
+                    }
+                    else
+                        Console.WriteLine("No data found");
+                    connection.Close();
+                    string query1 = @"update  PayrollDetails set Basepay=" + 300000 + "where payrollId="+1+"";
+                    SqlCommand command1 = new SqlCommand(query1, connection);
+                    connection.Open();
+                    command1.ExecuteNonQuery();
+                    
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+                    
+            
+        }
     }
 }
