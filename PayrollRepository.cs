@@ -11,6 +11,10 @@ namespace Payroll_Service_Ado
 Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         SqlConnection connection = new SqlConnection(connectionString);
 
+        /// <summary>
+        /// This method establishes connection and checks the connection
+        /// </summary>
+        /// <returns></returns>
         public bool CheckConnection()
         {
            
@@ -27,6 +31,9 @@ Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubn
                 return false;
             }
         }
+        /// <summary>
+        /// This method retrieves data present in PayrollDetails 
+        /// </summary>
         public void GetPayrollDetails()
         {
             PayrollDetails model = new PayrollDetails();
@@ -65,7 +72,11 @@ Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubn
                 connection.Close();
             }
         }
-        public void UpdateSalary()
+        /// <summary>
+        /// Method updates salary of a particular employee
+        /// </summary>
+        /// <returns></returns>
+        public int UpdateSalary()
         {
             PayrollDetails payroll = new PayrollDetails();
             int empId;
@@ -91,7 +102,8 @@ Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubn
                     string query1 = @"update  PayrollDetails set Basepay=" + 300000 + "where payrollId="+1+"";
                     SqlCommand command1 = new SqlCommand(query1, connection);
                     connection.Open();
-                    command1.ExecuteNonQuery();
+                   int result= command1.ExecuteNonQuery();
+                    return result;
                     
                     
                 }
