@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payroll Service Ado", "Payroll Service Ado.csproj", "{DDF7A197-2BDC-4A80-8AA4-07389B4E4947}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DDF7A197-2BDC-4A80-8AA4-07389B4E4947}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDF7A197-2BDC-4A80-8AA4-07389B4E4947}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDF7A197-2BDC-4A80-8AA4-07389B4E4947}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDF7A197-2BDC-4A80-8AA4-07389B4E4947}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {72E5739F-7523-47DE-805F-7D3490F81F12}
+	EndGlobalSection
+EndGlobal
