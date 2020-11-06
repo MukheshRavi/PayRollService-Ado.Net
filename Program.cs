@@ -8,6 +8,7 @@ namespace Payroll_Service_Ado
         {
             Console.WriteLine("Welcome to Payroll Service");
             new PayrollRepository().GetPayrollDetails();
+            new PayrollRepository().UpdateSalary();
         }
     }
 }
