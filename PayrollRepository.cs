@@ -116,8 +116,45 @@ Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubn
             {
                 connection.Close();
             }
-                    
-            
+        }
+        public void RetrieveWithStartDate()
+        {
+            try
+            {
+                // Give the query
+                string query= @"select * from Employee where start_date between cast('2020-01-01' as date) and cast(getdate() as date)";
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                EmployeeDetails employeeDetails = new EmployeeDetails();
+                while (reader.HasRows)
+                {
+                    if (reader.Read())
+                    {
+                        employeeDetails.empId = Convert.ToInt32(reader[0]);
+                        employeeDetails.empName = Convert.ToString(reader[1]);
+                        employeeDetails.gender = Convert.ToChar(reader[2]);
+                        employeeDetails.phoneNumber = Convert.ToString(reader[3]);
+                        employeeDetails.payrollId = Convert.ToInt32(reader[4]);
+                        employeeDetails.startDate = Convert.ToDateTime(reader[5]);
+                        Console.WriteLine(employeeDetails.empId + "       " + employeeDetails.empName + "        " +
+                                           employeeDetails.gender + "         " + employeeDetails.phoneNumber + "         " +
+                                           employeeDetails.payrollId + "          " + employeeDetails.startDate);
+                       
+                    }
+                    else
+                        break;
+                }
+                
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                    connection.Close();
+            }
         }
     }
 }

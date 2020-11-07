@@ -6,9 +6,12 @@ namespace Payroll_Service_Ado
     {
         static void Main(string[] args)
         {
+            PayrollRepository payrollRepository = new PayrollRepository();
             Console.WriteLine("Welcome to Payroll Service");
-            new PayrollRepository().GetPayrollDetails();
-            new PayrollRepository().UpdateSalary();
+           // payrollRepository.GetPayrollDetails();
+           // payrollRepository.UpdateSalary();
+            payrollRepository.RetrieveWithStartDate();
+
         }
     }
 }
