@@ -11,7 +11,8 @@ namespace Payroll_Service_Ado
             // payrollRepository.GetPayrollDetails();
             // payrollRepository.UpdateSalary();
             //payrollRepository.RetrieveWithStartDate();
-            payrollRepository.ImplementDatabaseFunctions();
+            // payrollRepository.ImplementDatabaseFunctions();
+            payrollRepository.DeleteEmployee(1);
 
         }
     }
