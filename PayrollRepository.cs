@@ -197,5 +197,42 @@ Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubn
                 connection.Close();
             }
         }
+        public bool AddEmployee(EmployeeDetails emp, PayrollDetails payrollDetails)
+        {
+            // open connection and create transaction
+            connection.Open();
+            try
+            {
+                // create a new command in transaction
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+
+                // Execute command
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.CommandText = "dbo.AddNewEmployee";
+                command.Parameters.AddWithValue("@EmpName", emp.empName);
+                command.Parameters.AddWithValue("@gender", emp.gender);
+                command.Parameters.AddWithValue("@PhoneNumber", emp.phoneNumber);
+                command.Parameters.AddWithValue("@start_date", emp.startDate);
+                command.Parameters.AddWithValue("@BasePay", payrollDetails.BasePay);
+                command.Parameters.AddWithValue("@Deductions", payrollDetails.Deductions);
+                command.Parameters.AddWithValue("@Incometax", payrollDetails.IncomeTax);
+                command.Parameters.AddWithValue("@TaxablePay", payrollDetails.TaxablePay);
+
+
+                var result = command.ExecuteNonQuery();
+                if (result != 1)
+                    return false;
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                    connection.Close();
+            }
+        }
     }
 }
