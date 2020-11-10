@@ -122,7 +122,7 @@ Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubn
             try
             {
                 // Give the query
-                string query= @"select * from Employee where start_date between cast('2020-01-01' as date) and cast(getdate() as date)";
+                string query= @"select * from Employee e where start_date between cast('2020-01-01' as date) and cast(getdate() as date) where e.IsActive=1";
                 SqlCommand command = new SqlCommand(query, connection);
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
@@ -219,6 +219,40 @@ Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubn
                 command.Parameters.AddWithValue("@Incometax", payrollDetails.IncomeTax);
                 command.Parameters.AddWithValue("@TaxablePay", payrollDetails.TaxablePay);
 
+
+                var result = command.ExecuteNonQuery();
+                if (result != 1)
+                    return false;
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                    connection.Close();
+            }
+        }
+        /// <summary>
+        /// UC 12 set _active and delete employee
+        /// </summary>
+        /// <param name="empid"></param>
+        /// <returns></returns>
+        public bool DeleteEmployee(int empid)
+        {
+            // open connection and create transaction
+            connection.Open();
+            try
+            {
+                // create a new command in transaction
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+
+                // Execute command
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.CommandText = "dbo.DeleteEmployee";
+                command.Parameters.AddWithValue("@Empid", empid);
 
                 var result = command.ExecuteNonQuery();
                 if (result != 1)
