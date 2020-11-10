@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Payroll_Service_Ado
 {
-    class PayrollDetails
+    public class PayrollDetails
     {
         public int Payrollid { get; set; }
         public int BasePay { get; set; }
